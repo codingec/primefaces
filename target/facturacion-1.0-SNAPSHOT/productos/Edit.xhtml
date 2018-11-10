@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductosEditDlg" widgetVar="ProductosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProductosTitle}">
+            <h:form id="ProductosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProductosLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{productosController.selected.id}" title="#{bundle.EditProductosTitle_id}" required="true" requiredMessage="#{bundle.EditProductosRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditProductosLabel_productName}" for="productName" />
+                        <p:inputText id="productName" value="#{productosController.selected.productName}" title="#{bundle.EditProductosTitle_productName}" required="true" requiredMessage="#{bundle.EditProductosRequiredMessage_productName}"/>
+                        <p:outputLabel value="#{bundle.EditProductosLabel_productQuantity}" for="productQuantity" />
+                        <p:inputText id="productQuantity" value="#{productosController.selected.productQuantity}" title="#{bundle.EditProductosTitle_productQuantity}" required="true" requiredMessage="#{bundle.EditProductosRequiredMessage_productQuantity}"/>
+                        <p:outputLabel value="#{bundle.EditProductosLabel_date}" for="date" />
+                        <p:calendar id="date" pattern="MM/dd/yyyy HH:mm:ss" value="#{productosController.selected.date}" title="#{bundle.EditProductosTitle_date}" required="true" requiredMessage="#{bundle.EditProductosRequiredMessage_date}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditProductosLabel_userId}" for="userId" />
+                        <p:inputText id="userId" value="#{productosController.selected.userId}" title="#{bundle.EditProductosTitle_userId}" required="true" requiredMessage="#{bundle.EditProductosRequiredMessage_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{productosController.update}" value="#{bundle.Save}" update="display,:ProductosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProductosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProductosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
